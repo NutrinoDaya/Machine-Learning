@@ -2,3 +2,7 @@
 Projects/Book Recommendation System/data/BX-Users.csv
 Projects/Book Recommendation System/data/BX-Book-Ratings.csv
 Projects/Book Recommendation System/data/Preprocessed_data.csv
+Projects/Book Recommendation System/books.pkl
+Projects/Book Recommendation System/popular.pkl
+Projects/Book Recommendation System/pt.pkl
+Projects/Book Recommendation System/similarity_scores.pkl
