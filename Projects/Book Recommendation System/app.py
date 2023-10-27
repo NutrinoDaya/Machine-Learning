@@ -27,8 +27,13 @@ def recommend_ui():
 def recommend():
     user_input = request.form.get('user_input')
     print(f"user_input : {user_input}")
-    index = np.where(pt.index == user_input)[0][0]
-    similar_items = sorted(list(enumerate(similarity_scores[index])), key=lambda x: x[1], reverse=True)[1:5]
+    index = None
+    similar_items = None
+    try:
+        index = np.where(pt.index == user_input)[0][0]
+        similar_items = sorted(list(enumerate(similarity_scores[index])), key=lambda x: x[1], reverse=True)[1:5]
+    except:
+        return render_template('recommend.html',data="")
 
     data = []
     for i in similar_items:
@@ -50,17 +55,3 @@ def recommend():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-
-""" 
-,book_title,book_author,year_of_publication,publisher,img_s,img_m,img_l,Summary,Language,Category,city,state,country
-,Classical Mythology,Mark P. O. Morford,2002.0,Oxford University Press,http://images.amazon.com/images/P/0195153448.01.THUMBZZZ.jpg,http://images.amazon.com/images/P/0195153448.01.MZZZZZZZ.jpg,http://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg,"Provides an introduction to classical myths placing the addressed
-topics within their historical context, discussion of archaeological
-evidence as support for mythical events, and how these themes have
-been portrayed in literature, art, ...",en,['Social Science'],stockton,california,usa
-1,8,"timmins, ontario, canada",34.74389988072476,0002005018,5,Clara Callan,Richard Bruce Wright,2001.0,HarperFlamingo Canada,http://images.amazon.com/images/P/0002005018.01.THUMBZZZ.jpg,http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg,http://images.amazon.com/images/P/0002005018.01.LZZZZZZZ.jpg,"In a small town in Canada, Clara Callan reluctantly takes leave of her
-sister, Nora, who is bound for New York.",en,['Actresses'],timmins,ontario,canada
-2,11400,"ottawa, ontario, canada",49.0,0002005018,0,Clara Callan,Richard Bruce Wright,2001.0,HarperFlamingo Canada,http://images.amazon.com/images/P/0002005018.01.THUMBZZZ.jpg,http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg,http://images.amazon.com/images/P/0002005018.01.LZZZZZZZ.jpg,"In a small town in Canada, Clara Callan reluctantly takes leave of her
-
-
-"""
